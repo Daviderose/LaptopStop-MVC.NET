@@ -17,13 +17,12 @@
     </tr>
 
     
-    @foreach (KeyValuePair<string, string> laptop in ViewBag.laptops)
+    @foreach (var laptop in ViewBag.laptops)
     {
-    <tr>
-        <td>@laptop.Key</td>
-        <td>@laptop.Value</td>
-    </tr>
-        
+        <tr>
+            <td>@laptop.Name</td>
+            <td>@laptop.Description</td>
+        </tr>   
     }
 
 </table>
