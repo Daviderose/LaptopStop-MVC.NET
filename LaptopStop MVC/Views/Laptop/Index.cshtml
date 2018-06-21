@@ -3,17 +3,29 @@
 
 <h1>My Laptops</h1>
 
-<p><a asp-controller="Laptop" asp-action="Add" >Add Laptop</a></p>
 
 @if (ViewBag.laptops.Count == 0)
 { 
     <p>No Laptops Have Been Added Yet </p>
 }
 
-    <ul>
-        @foreach (Dictionary<string, string> laptop in ViewBag.laptops)
-        {
-            <li>@laptop.</li>
-        }
+<table class="table">
 
-    </ul>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+
+    
+    @foreach (KeyValuePair<string, string> laptop in ViewBag.laptops)
+    {
+    <tr>
+        <td>@laptop.Key</td>
+        <td>@laptop.Value</td>
+    </tr>
+        
+    }
+
+</table>
+
+<p><a asp-controller="Laptop" asp-action="Add">Add Laptop</a></p>
