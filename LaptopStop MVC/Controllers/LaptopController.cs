@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LaptopStop_MVC.Models;
+using LaptopStop_MVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -15,37 +16,42 @@ namespace LaptopStop_MVC.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            ViewBag.laptops = LaptopData.GetAll();
+            List<Laptop> laptops = LaptopData.GetAll();
 
-            return View();
+            return View(laptops);
         }
 
         public IActionResult Add()
         {
-            return View();
+            AddLaptopViewModel addLaptopViewModel = new AddLaptopViewModel();
+            return View(addLaptopViewModel);
         }
 
         [HttpPost]
-        [Route("/Laptop/Add")]
-        public IActionResult NewLaptop(string name, string description)
+        public IActionResult Add(AddLaptopViewModel addLaptopViewModel)
         {
 
-            Laptop newLaptop = new Laptop
+            if (ModelState.IsValid)
             {
-                Description = description,
-                Name = name
-            };
+                // Add new laptop to the list of existing laptops
+                Laptop newLaptop = new Laptop
+                {
+                    Name = addLaptopViewModel.Name,
+                    Description = addLaptopViewModel.Description
+                };
 
-            // Add new laptop to the list of existing laptops
-            Laptops.Add(newLaptop);
+                LaptopData.Add(newLaptop);
 
-            return Redirect("/Laptop");
+                return Redirect("/Laptop");
+            }
+
+            return View(addLaptopViewModel);
         }
 
         public IActionResult Remove()
         {
             ViewBag.title = "Remove Laptops";
-            ViewBag.laptops = Laptops;
+            ViewBag.laptops = LaptopData.GetAll();
             return View();
         }
 
@@ -55,9 +61,24 @@ namespace LaptopStop_MVC.Controllers
             
             foreach (int laptopId in laptopIds)
             {
-                Laptops.RemoveAll(x => x.LaptopId == laptopId);
+                LaptopData.Remove(laptopId);
             }
 
+            return Redirect("/");
+        }
+
+        public IActionResult Edit(int laptopId)
+        {
+            ViewBag.laptop = LaptopData.GetById(laptopId);
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int laptopId, string name, string description)
+        {
+            Laptop foundLaptop = LaptopData.GetById(laptopId);
+            foundLaptop.Name = name;
+            foundLaptop.Description = description;
             return Redirect("/");
         }
 

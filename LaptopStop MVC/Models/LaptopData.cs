@@ -16,9 +16,22 @@ namespace LaptopStop_MVC.Models
         }
 
         // Add
+        public static void Add(Laptop newLaptop)
+        {
+            laptops.Add(newLaptop);
+        }
         
         // Remove
-
+        public static void Remove(int id)
+        {
+            Laptop laptopToRemove = GetById(id);
+            laptops.Remove(laptopToRemove);
+        }
+        
         // GetById
+        public static Laptop GetById(int id)
+        {
+            return laptops.Single(x => x.LaptopId == id);
+        }
     }
 }
