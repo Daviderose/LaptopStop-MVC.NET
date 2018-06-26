@@ -1,0 +1,19 @@
+﻿@model LaptopStop_MVC.ViewModels.ViewWishListViewModel
+
+@{
+    ViewBag.Title = Model.WishList.Name;
+ }
+
+<ul>
+    @foreach (var laptopWishList in Model.Items)
+    { 
+        <li>@laptopWishList.Laptop.Name</li>
+    }
+</ul>
+
+@if (Model.Items.Count == 0)
+{
+    <p><i>No items on WishList</i></p>
+}
+
+    <p><a asp-controller="WishList" asp-action="AddItem" asp-route-id="@Model.WishList.ID">Add Item</a></p>

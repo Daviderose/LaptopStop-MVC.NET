@@ -1,0 +1,18 @@
+﻿@model LaptopStop_MVC.ViewModels.AddWishListItemViewModel
+
+@{
+    ViewBag.Title = "Add Item to WishList: " + Model.WishList.Name;
+ }
+
+<form asp-controller="WishList" asp-action="AddItem" method="post">
+
+    <div class="form-group">
+        <label asp-for="LaptopID"></label>
+        <select asp-for="LaptopID" asp-items="Model.Laptops"></select>
+        <span asp-validation-for="LaptopID"></span>
+    </div>
+
+    <input type="hidden" name="WishListID" value="@Model.WishList.ID" />
+
+    <input type="submit" value="Add Item" />
+</form>

@@ -12,6 +12,8 @@
     <tr>
         <th>Name</th>
         <th>Description</th>
+        <th>Category</th>
+        <th>Edit</th>
     </tr>
 
     
@@ -20,7 +22,8 @@
     <tr>
         <td>@laptop.Name</td>
         <td>@laptop.Description</td>
-        <td><a asp-controller="Laptop" asp-action="Edit" asp-route-laptopId="@laptop.LaptopId">edit</a></td>
+        <td>@laptop.Category.Name</td>
+        <td><a asp-controller="Laptop" asp-action="Edit" asp-route-laptopId="@laptop.ID">edit</a></td>
     </tr>   
     }
 

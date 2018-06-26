@@ -1,0 +1,18 @@
+﻿@model IEnumerable<LaptopStop_MVC.Models.WishList>
+
+<h1>WishLists</h1>
+
+<p><a asp-controller="WishList" asp-action="Add" >Make WishList</a></p>
+
+<ul>
+    @foreach (var wishlist in Model)
+    {
+        <li>
+            <a asp-controller="WishList"
+               asp-action="ViewWishList"
+               asp-route-id="@wishlist.ID">@wishlist.Name</a>
+        </li>
+
+    }
+
+</ul>

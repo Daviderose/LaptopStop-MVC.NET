@@ -4,8 +4,8 @@
 
     @foreach (var laptop in ViewBag.laptops)
     { 
-       <input type="checkbox" name="laptopIds" id="@laptop.LaptopId" value="@laptop.LaptopId" />
-       <label for="@laptop.LaptopId">@laptop.Name</label>
+       <input type="checkbox" name="laptopIds" id="@laptop.ID" value="@laptop.ID" />
+       <label for="@laptop.ID">@laptop.Name</label>
        <br />
     }
 
