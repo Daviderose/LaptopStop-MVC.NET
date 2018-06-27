@@ -24,7 +24,7 @@ namespace LaptopStop_MVC.Controllers
         public IActionResult Index()
         {
             List<WishList> WishLists = context.WishLists.ToList();
-            return View();
+            return View(WishLists);
         }
 
         public IActionResult Add()
